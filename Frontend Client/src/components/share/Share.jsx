@@ -1,7 +1,8 @@
 import { useContext, useRef, useState } from "react"
 import "./share.css"
-import { PermMedia,Label,Room,EmojiEmotions } from "@mui/icons-material"
+import { PermMedia,Label,Room,EmojiEmotions, Cancel } from "@mui/icons-material"
 import {AuthContext} from '../../context/AuthContext.js'
+import axios from 'axios'
 
 export default function Share() {
   const {user} = useContext(AuthContext)
@@ -9,8 +10,33 @@ export default function Share() {
   const desc = useRef()
   const[file,setFile] = useState(null)
 
-  const submitHandler = () => {
-    console.log("Submitt")
+  const submitHandler = async(e) => {
+    e.preventDefault();
+    const newPost = {
+      userId: user._id,
+      desc: desc.current.value
+    }
+   
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+      console.log(newPost);
+      try {
+        await axios.post("http://localhost:8000/api/upload", data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    try {
+      await axios.post("http://localhost:8000/api/posts", newPost);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  console.log(file, "file name ma kiya a raha ha  ");
   }
   return (
     <div className="share">
@@ -24,6 +50,12 @@ export default function Share() {
              />
         </div>
         <hr className="shareHr"/>
+        {file && (
+          <div className="shareImgContainer">
+            <img src={URL.createObjectURL(file)} className="shareImg" alt="" />
+            <Cancel className="shareCancelImg" onClick = {() => setFile(null)}/>
+          </div>
+        )}
         <form className="shareBottom" onSubmit={submitHandler}>
             <div className="shareOptions">
                 <label htmlFor="file" className="shareOption">

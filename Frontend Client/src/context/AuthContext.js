@@ -7,12 +7,8 @@ const INITIAL_STATE = {
     "email": "gary@gmail.com",
     "profilePicture": "Person/1.jpeg",
     "coverPicture": "",
-    "followers": [
-        "66108594a06daa41505213fc"
-    ],
-    "followings": [
-        "66108594a06daa41505213fc"
-    ],
+    "followers": [],
+    "followings": [1,2,3],
     "isAdmin": false,
     "createdAt": "2024-04-05T23:12:42.997Z",
     "__v": 0,
