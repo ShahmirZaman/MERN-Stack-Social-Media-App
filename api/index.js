@@ -19,7 +19,7 @@ dotenv.config();
 dbConnection();
 
 app.use(cors({
-    origin: ["https://zamsocial-backend.vercel.app", "http://localhost:8000"],
+    origin: ["https://zamsocial-backend.vercel.app", "https://zamsocial-frontend.vercel.app"],
     credentials: true,
   }));
 
