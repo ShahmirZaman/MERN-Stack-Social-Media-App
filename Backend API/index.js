@@ -17,10 +17,12 @@ const app = express()
 const PORT = 8000
 dotenv.config();
 dbConnection();
-app.use(cors());
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-// app.use("/images", express.static(path.join(__dirname, "public/images")));
+
+app.use(cors({
+    origin: ["https://zamsocial-backend.vercel.app", "http://localhost:8000"],
+    credentials: true,
+  }));
+
 const __dirname = path.resolve();
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
@@ -38,6 +40,13 @@ const storage = multer.diskStorage({
     },
 })
 const upload = multer({storage})
+
+app.get("/", (req, res) => {
+    res.json({
+      message: "Cors Origin Added for frontend",
+    });
+  });
+
 app.post("/api/upload",upload.single("file"),(req,res) => {
     try {
         return res.status(200).json("File Uploaded SuccessFully!!")
