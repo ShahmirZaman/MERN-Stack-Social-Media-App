@@ -20,6 +20,7 @@ dbConnection();
 
 app.use(cors({
     origin: ["https://zamsocial-backend.vercel.app", "https://zamsocial-frontend.vercel.app"],
+    methods:["POST","GET","PUT","DELETE"],
     credentials: true,
   }));
 
