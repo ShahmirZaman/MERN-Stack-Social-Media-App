@@ -20,7 +20,7 @@ export default function Post({post}) {
 
   useEffect(() => {
     const fetchUser = async() => {
-        const res = await axios.get(`/users?userId=${post.userId}`)
+        const res = await axios.get(`https://zamsocial-backend.vercel.app/users?userId=${post.userId}`)
         console.log(res.data)
         setUser(res.data)
     }
@@ -29,7 +29,7 @@ export default function Post({post}) {
   
   const likeHandler = () => {
     try {
-      axios.put(`/posts/${post._id}/like`,{userId:currentUser._id})
+      axios.put(`https://zamsocial-backend.vercel.app/posts/${post._id}/like`,{userId:currentUser._id})
     } catch (error) {
       console.log(error)
     }

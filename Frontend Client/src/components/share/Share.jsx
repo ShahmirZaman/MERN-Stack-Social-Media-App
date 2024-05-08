@@ -25,13 +25,13 @@ export default function Share() {
       newPost.img = fileName;
       console.log(newPost);
       try {
-        await axios.post("http://localhost:8000/api/upload", data);
+        await axios.post("https://zamsocial-backend.vercel.app/api/upload", data);
       } catch (error) {
         console.log(error);
       }
     }
     try {
-      await axios.post("http://localhost:8000/api/posts", newPost);
+      await axios.post("https://zamsocial-backend.vercel.app/api/posts", newPost);
       window.location.reload();
     } catch (error) {
       console.log(error);
