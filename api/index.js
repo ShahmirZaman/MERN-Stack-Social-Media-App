@@ -44,7 +44,7 @@ const upload = multer({storage})
 
 app.get("/", (req, res) => {
     res.json({
-      message: "Cors Origin Added for frontend",
+      message: "Hello Backend",
     });
   });
 
